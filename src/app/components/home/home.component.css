@@ -1,0 +1,140 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.column {
+  flex: 1;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.content-center {
+  text-align: center;
+  flex: 2;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.image-left img, .image-right img {
+  width: 100%;
+  height: 90vh;
+  object-fit: cover;
+}
+
+h1 {
+  color: #103832;
+  font-size: 3em;
+}
+
+.contain-order {
+  background-color: #103832;
+  border: solid 1px #103832;
+  padding: 1em;
+  border-radius: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.contain-order h3, .contain-order p {
+  color: white;
+}
+
+.edit-order {
+  display: flow-root;
+}
+
+.order-end {
+  background: #f6f6f6;
+  padding: 1em 0;
+  border-radius: 1em;
+}
+.order-end button {
+  color: #103832;
+}
+
+.delete {
+  float: right;
+}
+
+.delete button {
+  color: #ffffff;
+  background: #103832;
+}
+
+.contain-buttons {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  width: 250px;
+  margin: auto;
+}
+
+.green {
+  background-color: #02ae88 !important;
+}
+
+.green-border {
+  border-color: #02ae88 !important;
+  color: #02ae88 !important;
+}
+
+.form-order {
+  padding-top: 1em;
+}
+
+.font-white p {
+  color: white;
+}
+
+.order-data {
+  display: flow;
+  margin-top: 1em;
+  border-radius: 1em;
+  background: white;
+  padding-bottom: 1em;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5em;
+  }
+  .container {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .column {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  .image-left img, .image-right img {
+    max-width: 100%;
+  }
+}
+@media (max-width: 576px) {
+  .container {
+    flex-direction: column;
+  }
+  .column {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+  .image-left img, .image-right img {
+    width: 485px;
+    height: 125px;
+    object-position: 0 -23em;
+  }
+  .content-center {
+    padding: 10px 0;
+  }
+}
+
+/*# sourceMappingURL=home.component.css.map */

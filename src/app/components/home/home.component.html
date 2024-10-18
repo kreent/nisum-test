@@ -1,0 +1,134 @@
+<div class="container">
+    <div class="column image-left">
+        <img src="https://images.pexels.com/photos/1977819/pexels-photo-1977819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+             aria-hidden="true" height="1920" width="1280" alt="">
+    </div>
+    <div class="column content-center">
+        <h1>Realiza tu orden</h1>
+        <mat-stepper orientation="vertical" [linear]="!isLinear" #stepper>
+            <mat-step [stepControl]="firstFormGroup">
+                <form [formGroup]="firstFormGroup" class="form-order">
+                    <ng-template matStepLabel>Tomamos tu orden</ng-template>
+                    <div class="item-one">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Tu nombre</mat-label>
+                            <input matInput formControlName="userName">
+                        </mat-form-field>
+                    </div>
+                    <div class="item-one">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Tu dirección</mat-label>
+                            <input matInput formControlName="userDir">
+                        </mat-form-field>
+                    </div>
+                    <div class="item-two">
+                        <mat-form-field>
+                            <mat-label>Selecciona tu café</mat-label>
+                            <mat-select formControlName="selectedCafe" required>
+                                <mat-option *ngFor="let food of data" [value]="food.name">
+                                    {{ food.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="item-two">
+                        <mat-form-field>
+                            <mat-label>Selecciona tu comida</mat-label>
+                            <mat-select formControlName="selectedFood" required>
+                                <mat-option *ngFor="let food of dataFood" [value]="food.name">
+                                    {{ food.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="item-two">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Solicitudes especiales</mat-label>
+                            <textarea matInput formControlName="comments" placeholder="Leche de almendra"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <button mat-flat-button matStepperNext [disabled]="firstFormGroup.invalid"
+                                (click)="saveToLocalStorage()">Siguiente
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step>
+                <div>
+                    <ng-template matStepLabel>Revisa tu orden</ng-template>
+                    <div class="delete">
+                        <button mat-mini-fab (click)="stepper.reset(); clearOrder()" aria-label="Eliminar orden">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                    <div *ngIf="!editMode" class="order-data">
+                        <mat-list>
+                            <mat-list-item *ngIf="userData.userName">A nombre de: {{ userData.userName }}
+                            </mat-list-item>
+                            <mat-list-item *ngIf="userData.userDir">Dirección: {{ userData.userDir }}</mat-list-item>
+                            <mat-list-item *ngIf="userData.comments">Solicitud: {{ userData.comments }}</mat-list-item>
+                        </mat-list>
+                        <button mat-raised-button (click)="toggleEdit()">Editar información de envío</button>
+                    </div>
+                    <div *ngIf="editMode" class="edit-order">
+                        <div>
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Tu nombre</mat-label>
+                                <input matInput [(ngModel)]="userData.userName">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Dirección</mat-label>
+                                <input matInput [(ngModel)]="userData.userDir">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Solicitud especial</mat-label>
+                                <textarea matInput [(ngModel)]="userData.comments"></textarea>
+                            </mat-form-field>
+                        </div>
+                        <button mat-button color="primary" (click)="saveChanges()">Guardar</button>
+                    </div>
+                    <div class="contain-order">
+                        <h3>
+                            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="favorite"></mat-icon>
+                            Tu orden
+                            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="favorite"></mat-icon>
+                        </h3>
+                        <mat-list class="font-white">
+                            <mat-list-item *ngIf="userData.selectedCafe"><p>Café: {{ userData.selectedCafe }}</p>
+                            </mat-list-item>
+                            <mat-list-item *ngIf="userData.selectedFood"><p>Comida: {{ userData.selectedFood }}</p>
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                    <div class="contain-buttons">
+                        <button mat-stroked-button matStepperPrevious class="green-border">Atrás</button>
+                        <button mat-flat-button matStepperNext class="green">Hacer pedido</button>
+                    </div>
+
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Orden solicitada</ng-template>
+                <div class="order-end">
+                    <p>Tu pedido ha sido completado y esta en camino</p>
+                    <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                        <mat-icon>coffee_maker</mat-icon>
+                    </button>
+                    <div>
+                        <button mat-button (click)="stepper.reset()">Hacer otro pedido</button>
+                    </div>
+                </div>
+            </mat-step>
+        </mat-stepper>
+    </div>
+    <div class="column image-right">
+        <img src="https://images.pexels.com/photos/28487799/pexels-photo-28487799/free-photo-of-espacio-de-trabajo-minimalista-con-computadora-portatil-y-taza-de-cafe.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+             aria-hidden="true" height="1920" width="1280" alt="">
+    </div>
+</div>
